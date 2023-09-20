@@ -1,75 +1,91 @@
 import React from 'react';
 import { SmileOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Card, Col, Row, Input, Form as AntForm } from 'antd';
+import { Formik, Form, Field, ErrorMessage,  } from 'formik';
+import * as Yup from 'yup'
 import { TextLevel } from '../../components';
-
-const onFinish = (values: object) => {
-    console.log('Success:', values);
-  };
-  
-  const onFinishFailed = (errorInfo: object) => {
-    console.log('Failed:', errorInfo);
-  };
-  
-  type FieldType = {
+import styles from './Register.module.css'
+import { useNavigate } from 'react-router-dom';
+interface RegisterInfo {
     name: string;
-    username?: string;
-    password?: string;
-    remember?: string;
-  };
-  
-  const Register: React.FC = () => (
-    <Form
-      name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600 }}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
-      <TextLevel level={3} content={"Register"}/>
+    email: string;
+    password: string;
+}
 
-      <Form.Item<FieldType>
-        label="Name"
-        name="name"
-        
-        rules={[{ required: true, message: 'Please input your name!' }]}
-      >
-        <Input prefix={<SmileOutlined className="site-form-item-icon" />} />
-      </Form.Item>
-      
-      <Form.Item<FieldType>
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
-      >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} />
-      </Form.Item>
-  
-      <Form.Item<FieldType>
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-        <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
-      </Form.Item>
-  
-      <Form.Item<FieldType>
-        name="remember"
-        valuePropName="checked"
-        wrapperCol={{ offset: 8, span: 16 }}
-      >
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
-  
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Register
-        </Button>
-      </Form.Item>
-    </Form>
-  );
+const passwordValidationError = (str: string) => {
+    return `Your Password must have at least 1 ${str} character`;
+}
+
+const validationSchema = Yup.object().shape({
+    name: Yup.string().required('Please Enter Your Name'),
+    email: Yup.string().email("Invalid Email!").required('Please Enter Your Email'),
+    password: Yup.string().min(8, "Password must have at least 8 characters")
+    .matches(/[0-9]/, passwordValidationError("digit"))
+    .matches(/[a-z]/, passwordValidationError("lowercase"))
+    .matches(/[A-Z]/, passwordValidationError("uppercase"))
+    .required('Please Enter Your Password')
+})
+
+  const Register: React.FC = () => {
+    const navigate = useNavigate()
+
+    const handleSubmit = (values: RegisterInfo) => {
+        console.log(`Successfully registered!`,values)
+        navigate('/login')
+      }
+    
+
+      return (
+        <Row className={styles.wrapper}>
+            <Col span={8}></Col>
+            <Col span={8} className={styles.body}>
+                <Card className={styles.card}>
+                    <Formik 
+                    initialValues = {{name: "", email: "", password: ""}}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmit}>
+                        <Form name="basic" autoComplete="off">
+                            <TextLevel level={3} content={"Register"}/>
+                    
+                            <AntForm.Item label="Name">
+                            <Field prefix={<SmileOutlined className="site-form-item-icon" />} 
+                            name="name" as={Input} placeholder="Enter Your Name" />
+                            
+                            <div className={styles.error}>
+                                <ErrorMessage name="name" />
+                            </div>
+                            </AntForm.Item>
+                    
+                            <AntForm.Item label="Email" name="email">
+                            <Field prefix={<UserOutlined className="site-form-item-icon" />} 
+                            name="email" as={Input} placeholder="Enter Your Email" />
+                            
+                            <div className={styles.error}>
+                                <ErrorMessage name="email" />
+                            </div>
+                            </AntForm.Item>
+                        
+                            <AntForm.Item label="Password" name="password">
+                            <Field prefix={<LockOutlined className="site-form-item-icon" />} 
+                            name="password" as={Input} placeholder="Enter Your Password" />
+
+                            <div className={styles.error}>
+                                <ErrorMessage name="password" />
+                            </div>
+                            </AntForm.Item>
+                        
+                            <AntForm.Item wrapperCol={{ offset: 8, span: 16 }}>
+                            <Button type="primary" htmlType="submit">
+                                Register
+                            </Button>
+                            </AntForm.Item>
+                        </Form>
+                    </Formik>
+                </Card>
+            </Col>
+        </Row>
+      )
+ 
+    };
 
   export default Register
