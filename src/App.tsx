@@ -1,35 +1,16 @@
-import { useState } from 'react';
 import './App.css'
+import  {BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Login, Register } from './containers'
 
 function App() {
-  const [step, setStep] = useState<number>(1);
-
-  const handleNext = () => {
-    if(step === 1 || step === 2) {
-        setStep((prevStep) => prevStep+1);
-    }
-
-    return
-  }
-
-  const handlePrev = () => {
-    if(step === 2 || step === 3) {
-        setStep((prevStep) => prevStep - 1);
-    }
-
-    return
-  }
-
+  
   return (
-    <>
-      {step === 1 && (
-        <Login />    
-      )}
-      {step === 2 && (
-        <Register />  
-      )}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/login' element={<Login />} /> 
+        <Route path='/register' element={<Register />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
