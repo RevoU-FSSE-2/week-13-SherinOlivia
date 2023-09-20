@@ -10,8 +10,8 @@ Features or tools used:
 
 ## Deployed link: 
 <p align="center">
-<a href="x">x</a>||
-<a href="x">x</a>
+<a href="https://earnest-cheesecake-df11d0.netlify.app">earnest-cheesecake-df11d0.netlify.app</a>||
+<a href="https://w13sh-react-multipage.roozone.site/">w13sh-react-multipage.roozone.site</a>
 </p> 
 
 
