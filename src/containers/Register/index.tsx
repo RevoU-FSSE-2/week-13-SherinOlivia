@@ -29,11 +29,35 @@ const validationSchema = Yup.object().shape({
   const Register: React.FC = () => {
     const navigate = useNavigate()
 
-    const handleSubmit = (values: RegisterInfo) => {
-        console.log(`Successfully registered!`,values)
-        navigate('/login')
-      }
+    // const handleSubmit = (values: RegisterInfo) => {
+    //     console.log(`Successfully registered!`,values)
+    //     navigate('/login')
+    //   }
+      const handleRegister = async (values: RegisterInfo) => {
+        console.log(`Successfully Registered..!`, values)
+        const apiUrl = "https://mock-api.arikmpt.com/api/user/register"
     
+        try {
+            const response = await fetch (apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            })
+            console.log(response)
+            const data = await response.json()
+    
+            if (response.ok){
+                navigate('/login');
+            } else {
+                alert(data.errors)
+            }
+        } catch (error) {
+            alert("Register Failedddd...!")
+        }
+    
+      }
 
       return (
         <Row className={styles.wrapper}>
@@ -43,7 +67,7 @@ const validationSchema = Yup.object().shape({
                     <Formik 
                     initialValues = {{name: "", email: "", password: ""}}
                     validationSchema={validationSchema}
-                    onSubmit={handleSubmit}>
+                    onSubmit={handleRegister}>
                         <Form name="basic" autoComplete="off">
                             <TextLevel level={3} content={"Register"}/>
                     

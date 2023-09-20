@@ -22,9 +22,33 @@ const validationSchema = Yup.object().shape({
 const Login: React.FC = () => {
   const navigate = useNavigate()
 
-  const handleSubmit = (values: LoginInfo) => {
+  const handleLogin = async (values: LoginInfo) => {
     console.log(`Successfully logged in`, values)
-    navigate('/');
+    const apiUrl = "https://mock-api.arikmpt.com/api/user/login"
+
+    try {
+        const response = await fetch (apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(values)
+        })
+        console.log(response)
+        const data = await response.json()
+
+        if (response.ok){
+            const token = data.data.token
+
+            localStorage.setItem('authToken', token)
+            navigate('/');
+        } else {
+            alert(data.errors)
+        }
+    } catch (error) {
+        alert("Login Failedddd...!")
+    }
+
   }
 
   return (
@@ -35,7 +59,7 @@ const Login: React.FC = () => {
             <Formik 
             initialValues = {{ email: "", password: ""}}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}>
+            onSubmit={handleLogin}>
                 <Form name="basic" autoComplete="off">
                     <TextLevel level={3} content={"Login"}/>
                      
@@ -50,7 +74,8 @@ const Login: React.FC = () => {
                 
                     <AntForm.Item label="Password" name="password">
                     <Field prefix={<LockOutlined className="site-form-item-icon" />} 
-                    name="password" as={Input} placeholder="Enter Your Password" />
+                    name="password" as={Input} placeholder="Enter Your Password" 
+                    />
 
                     <div className={styles.error}>
                         <ErrorMessage name="password" />
