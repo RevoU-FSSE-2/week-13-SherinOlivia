@@ -6,11 +6,7 @@ import * as Yup from 'yup'
 import { TextLevel } from '../../components';
 import styles from './Register.module.css'
 import { useNavigate } from 'react-router-dom';
-interface RegisterInfo {
-    name: string;
-    email: string;
-    password: string;
-}
+import { RegisterInfo } from '../../types';
 
 const passwordValidationError = (str: string) => {
     return `Your Password must have at least 1 ${str} character`;

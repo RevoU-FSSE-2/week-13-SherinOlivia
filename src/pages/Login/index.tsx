@@ -6,17 +6,11 @@ import * as Yup from 'yup'
 import { TextLevel } from '../../components';
 import styles from './Login.module.css'
 import { Link, useNavigate } from 'react-router-dom';
-
-interface LoginInfo {
-    email: string;
-    password: string;
-}
-
+import { LoginInfo } from '../../types';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid Email!").required('Please Enter Your Email'),
-    password: Yup.string().min(8, "Password must have at least 8 characters")
-    .required('Please Enter Your Password')
+    password: Yup.string().required('Please Enter Your Password')
 })
 
 const Login: React.FC = () => {
@@ -24,7 +18,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async (values: LoginInfo) => {
     console.log(`Successfully logged in`, values)
-    const apiUrl = "https://mock-api.arikmpt.com/api/user/login"
+    const apiUrl = import.meta.env.VITE_REACT_APP_LOGIN_URL;
 
     try {
         const response = await fetch (apiUrl, {
@@ -57,7 +51,7 @@ const Login: React.FC = () => {
     <Col span={8} className={styles.body}>
         <Card className={styles.card}>
             <Formik 
-            initialValues = {{ email: "", password: ""}}
+            initialValues = {{ email: "testSh2@gmail.com", password: "testSh123"}}
             validationSchema={validationSchema}
             onSubmit={handleLogin}>
                 <Form name="basic" autoComplete="off">
