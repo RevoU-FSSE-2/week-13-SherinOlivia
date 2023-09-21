@@ -1,6 +1,6 @@
 import './App.css'
 import  {BrowserRouter, Route, Routes } from 'react-router-dom'
-import { CategoryList, Login, Register } from './containers'
+import { CategoryList, Login, Register } from './pages'
 
 function App() {
   
