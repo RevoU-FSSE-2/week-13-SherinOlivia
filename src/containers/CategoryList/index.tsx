@@ -4,6 +4,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { useNavigate } from 'react-router-dom';
 import { CategoryList as CategoryListComponent, TextLevel } from '../../components'
 import styles from './CategoryList.module.css'
+import { getStatus} from '../../hooks';
 
 // interface GetCategoryResponse {
 //   categories: CategoryInfo[];
@@ -22,6 +23,7 @@ const CategoryList: React.FC = () => {
   const [categories, setCategories] = useState<CategoryInfo[]>([]);
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_REACT_APP_BASE_URL;
+  console.log(apiUrl)
 
 const handleLogOut = () => {
   localStorage.removeItem('authToken')
@@ -29,16 +31,20 @@ const handleLogOut = () => {
 } 
 
 const getCategory = async () => { 
+  const token = localStorage.getItem('authToken')
+  console.log("Auth Token:", token)
   try {
     const response = await fetch(apiUrl, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('authToken')}`
+
       },
     })
     const data = await response.json()
     console.log(data)
-    setCategories(data.categories)
+    setCategories(data.data)
   } catch (error) {
+    console.error("ERROR:", error)
     alert("Failed to fetch Categories!")
   }
 }
@@ -50,6 +56,7 @@ useEffect(() => {
       }
       getCategory()
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
   const columns: ColumnsType<CategoryInfo> = [
@@ -67,6 +74,7 @@ useEffect(() => {
       title: 'Status',
       dataIndex: 'is_active',
       key: 'is_active',
+      render: (_, record) => getStatus({ status: record.status })
     },
     {
       title: 'Action',
@@ -74,7 +82,7 @@ useEffect(() => {
       render: (_, record) => (
         <>
           <Button type={'primary'} onClick={() => navigate(`${apiUrl}update`)}>Edit</Button>
-          <Button type={'primary'} onClick={() => navigate(`${apiUrl}${record.id}`)}>Delete</Button>
+          <Button type={'primary'} onClick={() => navigate(`${apiUrl}delete/${record.id}`)} danger>Delete</Button>
         </>
 
       ),
