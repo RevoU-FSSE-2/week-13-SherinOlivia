@@ -2,12 +2,19 @@
 
 For this week's assignment, we are to create 3 pages, which consists of Register Page, Login Page, and List of Categories Page.
 
-Features or tools used:
+Tools used:
 - UI Library (AntDesign)
 - Formik & Yup
 - React Router
 - Typescript
 
+Features:
+- Register user
+- Login user
+- Pagination
+- Create new Item/Category
+- Delete Item/Category 
+- Edit Item/Category
 ## Deployed link: 
 <p align="center">
 <a href="https://earnest-cheesecake-df11d0.netlify.app">earnest-cheesecake-df11d0.netlify.app</a>||
