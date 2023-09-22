@@ -1,0 +1,30 @@
+.error {
+    color: red
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10vw 0;
+}
+
+.body {
+    grid-column: 1 / span 3;
+}
+
+.card {
+    min-height: 5vh;
+    min-width: 50vw;
+}
+
+.middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2vh;
+}
+
+.button {
+    padding: 0 25%;
+}
