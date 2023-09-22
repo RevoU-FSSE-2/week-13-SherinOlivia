@@ -1,11 +1,10 @@
 import { Table } from "antd"
 import { ColumnsType } from "antd/es/table";
 
-
 interface CategoryInfo {
     id: string;
     name: string;
-    status: boolean;
+    is_active: boolean;
   }
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 
 const CategoryList = ({ data, columns} : Props) => {
   const pagination = {
-    pageSize: 10, 
+    pageSize: 5, 
     total: data.length,
   };
 
