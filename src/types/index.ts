@@ -9,10 +9,15 @@ export interface LoginInfo {
     password: string;
 }
 
+// export interface LoginResponse {
+//     name: string;
+//     email: string;
+//     token: string;
+// }
 export interface CategoryInfo {
     id: string;
     name: string;
-    status: boolean;
+    is_active: boolean;
 }
 
-export type CreateInfo = Omit<CategoryInfo, 'id'>
+export type CategoryFormInfo = Omit<CategoryInfo, 'id'>
