@@ -1,20 +1,21 @@
 import { useMemo } from 'react';
 
-interface Props {
-    status: boolean;
-}
+// interface Props {
+//     is_active: boolean;
+// }
 
-const useStatus = ({ status }: Props) => {
+const useStatus = ( is_active : boolean) => {
 
     const formatStatus = useMemo(
         () => {
-            if(status === true) {
+            if(is_active === true) {
                 return 'Active'
             }
 
             return 'Deactive'
         },
-        [status]
+        [is_active]
+
     )
 
     return formatStatus
