@@ -40,6 +40,7 @@ const Login: React.FC = () => {
             alert(data.errors)
         }
     } catch (error) {
+        console.error(error)
         alert("Login Failedddd...!")
     }
 
