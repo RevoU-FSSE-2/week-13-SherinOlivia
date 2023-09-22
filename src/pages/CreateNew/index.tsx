@@ -1,17 +1,16 @@
 import { useNavigate } from "react-router-dom"
-import {  CreateInfo } from "../../types";
-import { CreateNew as CreateNewComponent } from "../../components";
+import {  CategoryFormInfo as CreateInfo } from "../../types";
+import { CategoryForm as CreateNewComponent } from "../../components";
 
 
 const CreateNew = () => {
     const navigate = useNavigate()
 
     const handleCreate = async (values: CreateInfo) => {
-        console.log(`Successfully Created New Category:`, values)
-        const apiUrl = import.meta.env.VITE_REACT_APP_CREATE_URL;
+        const apiUrl = import.meta.env.VITE_REACT_APP_BASE_URL;
       
         try {
-            const response = await fetch (apiUrl, {
+            const response = await fetch (`${apiUrl}create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,7 +34,7 @@ const CreateNew = () => {
       }
 
     return (
-        <CreateNewComponent onSubmit={handleCreate} />
+        <CreateNewComponent onSubmit={handleCreate} content={"Create New Category"} />
     )    
 }
 
