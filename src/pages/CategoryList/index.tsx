@@ -10,8 +10,8 @@ import { CategoryInfo } from '../../types';
 const CategoryList: React.FC = () => {
   const [categories, setCategories] = useState<CategoryInfo[]>([]);
   const navigate = useNavigate();
+
   const apiUrl = import.meta.env.VITE_REACT_APP_BASE_URL;
-  const getStatusText = useStatus({ status: true });
 
 const handleLogOut = () => {
   localStorage.removeItem('authToken')
@@ -59,9 +59,12 @@ useEffect(() => {
           }
         })
   
-        if(response.ok) {
-            setCategories((categories) => categories.filter((category) => category.id !== id))
-            console.log("`Successfully Removed category")
+        if(response) {
+          setCategories((prevCategories) =>
+          prevCategories.filter((category) => category.id !== id)
+        );
+          navigate(0)
+          console.log('Successfully Removed category');
         }
     } catch (error) {
         console.error(error)
@@ -83,15 +86,16 @@ useEffect(() => {
       title: 'Status',
       dataIndex: 'is_active',
       key: 'is_active',
-      render: () => getStatusText
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      render: (_, record) => useStatus(record.is_active),
     },
     {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
         <>
-          <Button type={'primary'} onClick={() => navigate(`${apiUrl}update`)}>Edit</Button>
-          <Button type={'primary'} onClick={() => removeCategory(record.id) } danger>Delete</Button>
+          <Button type={'primary'} onClick={() => navigate(`/edit/${record.id}`)}>Edit</Button>
+          <Button type={'primary'} onClick={() => removeCategory(record.id) } htmlType="button" danger>Delete</Button>
         </>
 
       ),
