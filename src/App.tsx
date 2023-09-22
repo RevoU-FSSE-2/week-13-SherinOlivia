@@ -4,6 +4,7 @@ import { CategoryList, CreateNew, Login, Register, UpdateCategory } from './page
 
 function App() {
   
+  
   return (
     <BrowserRouter>
       <Routes>
