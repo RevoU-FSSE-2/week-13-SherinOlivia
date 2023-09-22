@@ -22,12 +22,14 @@
 - Delete Item/Category 
 - Edit Item/Category
 <br>
+
 ## Deployed link: 
 <p align="center">
 <a href="https://earnest-cheesecake-df11d0.netlify.app">earnest-cheesecake-df11d0.netlify.app</a>||
 <a href="https://w13sh-react-multipage.roozone.site/">w13sh-react-multipage.roozone.site</a>
 </p> 
 <br>
+
 ## How to Run the App
 
 For testing purposes, please access the deployed link above (both links lead to the same site)
