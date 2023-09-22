@@ -1,26 +1,33 @@
 # Week 13 Assignment Overview
 
-For this week's assignment, we are to create 3 pages, which consists of Register Page, Login Page, and List of Categories Page.
+<p align="justify">For this week's assignment, we were tasked with building a page using `React` and `TypeScript`, with UI components from the UI library of our choice, I decided to delve into `Ant Design`. </p>
 
-Tools used:
+<p align="justify">When visiting the page, Users can access the Login Form or Register Form if they haven't registered. After logging in, Users will be redirected to the Main/Homepage, where Users are able to see 'List of Categories'. </p>
+<p align="justify">On the List of Categories (homepage), Users would then be able to access the rest of the features, such as creating new categories, editing said categories and deleting category items.  All form paths are defined using `react-router-dom`, and each form is validated using `Formik` and `Yup`. As an additional security measure, API URLs are stored using `dotenv`.</p>
+
+**Tools used:**
 - UI Library (AntDesign)
 - Formik & Yup
-- React Router
+- React
+- vite
 - Typescript
+- dotenv
+- React Router
 
-Features:
+**Features:**
 - Register user
 - Login user
 - Pagination
 - Create new Item/Category
 - Delete Item/Category 
 - Edit Item/Category
+<br>
 ## Deployed link: 
 <p align="center">
 <a href="https://earnest-cheesecake-df11d0.netlify.app">earnest-cheesecake-df11d0.netlify.app</a>||
 <a href="https://w13sh-react-multipage.roozone.site/">w13sh-react-multipage.roozone.site</a>
 </p> 
-
+<br>
 ## How to Run the App
 
 For testing purposes, please access the deployed link above (both links lead to the same site)
