@@ -1,9 +1,5 @@
 import { useMemo } from 'react';
 
-// interface Props {
-//     is_active: boolean;
-// }
-
 const useStatus = ( is_active : boolean) => {
 
     const formatStatus = useMemo(
