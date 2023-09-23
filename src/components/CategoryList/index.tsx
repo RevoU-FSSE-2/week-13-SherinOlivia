@@ -13,9 +13,15 @@ interface Props {
   }
 
 const CategoryList = ({ data, columns} : Props) => {
-
+  const pagination = {
+    pageSize: 5,
+  }
     return (
-        <Table columns={columns} dataSource={data} />
+      <>
+        <Table columns={columns} dataSource={data} pagination={pagination} />
+
+      </>
+
     )
 }
 
