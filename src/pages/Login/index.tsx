@@ -24,7 +24,7 @@ const Login = () => {
             const token = data.data.token
 
             localStorage.setItem('authToken', token)
-            navigate('/coba');
+            navigate('/');
         } else {
             alert(data.errors)
         }
