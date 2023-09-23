@@ -8,7 +8,7 @@ interface CategoryInfo {
   }
 
 interface Props {
-    data: CategoryInfo[];
+    data?: CategoryInfo[];
     columns: ColumnsType<CategoryInfo>;
   }
 
