@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Button, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useNavigate } from 'react-router-dom';
@@ -22,10 +22,12 @@ const handleLogOut = () => {
   navigate('/login');
 } 
 
-const getCategory = async () => {
+const getCategory = useCallback(
+   async () => {
   const token = localStorage.getItem('authToken');
   if(!token){
-    window.location.replace('/login')
+    navigate('/login')
+    return
   }
 
   console.log("Auth Token:", token);
@@ -50,11 +52,11 @@ const getCategory = async () => {
     console.error("ERROR:", error);
     alert("Failed to fetch Categories!");
   }
-};
+},[navigate]);
 
 useEffect(() => {
   getCategory()
-}, [])
+}, [getCategory])
 
   // remove/delete item
   const removeCategory = async (id: string) => {
