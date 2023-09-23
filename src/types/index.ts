@@ -21,3 +21,10 @@ export interface CategoryInfo {
 }
 
 export type CategoryFormInfo = Omit<CategoryInfo, 'id'>
+
+export interface GetCategoryResponse {
+    categories: CategoryInfo[];
+    total: number;
+    skip: number;
+    limit: number;
+}

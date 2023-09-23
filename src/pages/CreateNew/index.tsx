@@ -21,7 +21,7 @@ const CreateNew = () => {
             if (response.ok) {
                 console.log(response)
                 await response.json()
-                navigate('/');  
+                navigate('/coba');  
             } else {
                 console.log("Failed to create new category")
                 return

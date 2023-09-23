@@ -3,3 +3,6 @@ export { default as Register } from './Register'
 export { default as CategoryList } from './CategoryList'
 export { default as CreateNew } from './CreateNew'
 export { default as UpdateCategory } from './UpdateCategory'
+
+
+export { default as CategoryRetry } from './CategoryRetry'

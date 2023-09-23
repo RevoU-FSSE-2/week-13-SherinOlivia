@@ -1,6 +1,6 @@
 import './App.css'
 import  {BrowserRouter, Route, Routes } from 'react-router-dom'
-import { CategoryList, CreateNew, Login, Register, UpdateCategory } from './pages'
+import { CategoryList, CreateNew, Login, Register, UpdateCategory,CategoryRetry } from './pages'
 
 function App() {
   
@@ -13,6 +13,7 @@ function App() {
         <Route path='/' element={<CategoryList />} />
         <Route path='/add' element={<CreateNew />} />
         <Route path='/edit/:id' element={<UpdateCategory />} />
+        <Route path='/coba' element={<CategoryRetry />} />
       </Routes>
     </BrowserRouter>
   )
